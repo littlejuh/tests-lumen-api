@@ -15,12 +15,12 @@ class CreateVotesTable extends Migration
         Schema::create('votes', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->integer('candidate_id')->unsigned();
+            $table->integer('participant_id')->unsigned();
             $table->integer('campaign_id')->unsigned();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->string('ip_address', 64);
 
-            $table->foreign('candidate_id')->references('id')->on('candidates');
+            $table->foreign('participant_id')->references('id')->on('participants');
             $table->foreign('campaign_id')->references('id')->on('campaigns');
         });
     }

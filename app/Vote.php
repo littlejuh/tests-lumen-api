@@ -9,9 +9,9 @@ class Vote extends Model
     public $timestamps = false;
 
     /**
-     * Get the vote that owns the candidate.
+     * Get the vote that owns the participant.
      */
-    public function candidate()
+    public function participant()
     {
         return $this->belongsTo('App\Post');
     }

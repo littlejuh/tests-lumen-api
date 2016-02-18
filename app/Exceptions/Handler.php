@@ -12,50 +12,51 @@ use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
-    use JsonResponseTrait;
-    /**
-     * A list of the exception types that should not be reported.
-     *
-     * @var array
-     */
-    protected $dontReport = [
-        AuthorizationException::class,
-        HttpException::class,
-        ModelNotFoundException::class,
-        ValidationException::class,
-    ];
+  use JsonResponseTrait;
+  /**
+   * A list of the exception types that should not be reported.
+   *
+   * @var array
+   */
+  protected $dontReport = [
+    AuthorizationException::class,
+    HttpException::class,
+    ModelNotFoundException::class,
+    ValidationException::class,
+  ];
 
-    /**
-     * Report or log an exception.
-     *
-     * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
-     *
-     * @param  \Exception $e
-     * @return void
-     */
-    public function report(Exception $e)
-    {
-        parent::report($e);
+  /**
+   * Report or log an exception.
+   *
+   * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
+   *
+   * @param  \Exception $e
+   * @return void
+   */
+  public function report(Exception $e)
+  {
+    parent::report($e);
+  }
+
+  /**
+   * Render an exception into an HTTP response.
+   *
+   * @param  \Illuminate\Http\Request $request
+   * @param  \Exception $e
+   * @return \Illuminate\Http\Response
+   */
+  public function render($request, Exception $e)
+  {
+    dd($e);
+    switch ($e) {
+      case ($e instanceof NotFoundHttpException):
+      case ($e instanceof ModelNotFoundException):
+        return $this->response()->notFound([], ["error" => ["message" => $e->getMessage()]]);
+        break;
+      default:
+        return $this->response()->internalError([], ["error" => ["message" => $e->getMessage()]]);
+        break;
     }
 
-    /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Exception $e
-     * @return \Illuminate\Http\Response
-     */
-    public function render($request, Exception $e)
-    {
-        switch ($e) {
-            case ($e instanceof NotFoundHttpException):
-            case ($e instanceof ModelNotFoundException):
-                return $this->response()->notFound([], ["error" => ["message" => $e->getMessage()]]);
-                break;
-            default:
-                return $this->response()->internalError([], ["error" => ["message" => $e->getMessage()]]);
-                break;
-        }
-
-    }
+  }
 }

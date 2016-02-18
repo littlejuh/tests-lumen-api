@@ -13,5 +13,5 @@
 
 
 $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers'], function ($app) {
-    $app->get('candidates', ['uses' => 'CandidatesController@index']);
+    $app->get('participants', ['uses' => 'ParticipantsController@index']);
 });

@@ -10,11 +10,11 @@ class Campaign extends Model
 
 
     /**
-     * The candidates that belong to the campaign.
+     * The participants that belong to the campaign.
      */
-    public function candidates()
+    public function participants()
     {
-        return $this->belongsToMany('App\Candidate');
+        return $this->belongsToMany('App\Participant');
     }
 
 }
