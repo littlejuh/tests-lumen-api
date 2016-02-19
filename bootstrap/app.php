@@ -61,7 +61,7 @@ $app->singleton(
 |
 */
 
-$app->middleware([App\Http\Middleware\Cors::class]);
+$app->middleware([Vluzrmos\LumenCors\CorsMiddleware::class]);
 
 /*
 |--------------------------------------------------------------------------

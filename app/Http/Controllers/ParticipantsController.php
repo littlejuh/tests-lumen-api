@@ -33,13 +33,13 @@ class ParticipantsController extends Controller
   {
     $campaign = Campaign::where('is_active', '=', true)
       ->where('end_at', '>', Carbon::now())->first();
-    $participants = $campaign->participants()->get();
 
-    if (empty($participants->fields)) {
+    if (is_null($campaign)) {
       return $this->response()->notFound(['participants' => []]);
     }
+
     return $this->response()->success(['participants' => $this->participantTransformer
-        ->transformCollection($participants)]
+        ->transformCollection($campaign->participants()->get())]
     );
   }
 
