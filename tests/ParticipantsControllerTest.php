@@ -19,8 +19,10 @@ class ParticipantsControllerTest extends TestCase
     $participant->name = 'Participante 1';
     $participant->save();
     $campaign = new Campaign();
+    $campaign->name = 'compaign1';
     $campaign->is_active = true;
     $campaign->end_at = Carbon::now()->addDay(5);
+    $campaign->start_at = Carbon::now();
     $campaign->save();
     $campaign->participants()->attach($participant);
   }
