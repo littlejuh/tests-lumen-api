@@ -16,12 +16,14 @@ class CampaignController
    */
   public function index()
   {
-    $campaigns = Campaign::orderBy('start_at', 'DESC');
-
+    $campaigns = Campaign::orderBy('start_at', 'DESC')->get();
+    if($campaigns->isEmpty()){
+       return $this->response()->notFound(['campaigns' => []])->setStatusCode(404);
+    }
     $transform = $campaigns->map(function ($campaign) {
       return $campaign->transformToArray(($campaign));
     });
-
+    
     return $this->response()->success(['campaigns' => $transform]);
   }
 
@@ -34,7 +36,7 @@ class CampaignController
   public function show($id)
   {
     $campaign = Campaign::FindOrFail($id);
-
+  
     $transform = array_merge(
       $campaign->transformToArray(),
       [
@@ -66,5 +68,4 @@ class CampaignController
     return $this->response()->success(['campaign' => $transform]
     );
   }
-
 }
