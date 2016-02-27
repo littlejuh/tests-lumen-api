@@ -13,25 +13,11 @@ class ParticipantsControllerTest extends TestCase
 {
   use DatabaseTransactions;
 
-  private function setUpParticipantsInCampaign()
-  {
-    $participant = new Participant();
-    $participant->name = 'Participante 1';
-    $participant->save();
-    $campaign = new Campaign();
-    $campaign->name = 'compaign1';
-    $campaign->is_active = true;
-    $campaign->end_at = Carbon::now()->addDay(5);
-    $campaign->start_at = Carbon::now();
-    $campaign->save();
-    $campaign->participants()->attach($participant);
-  }
-
   public function testIfCanGetAListOfParticipants()
   {
     $this->setUpParticipantsInCampaign();
     $data = $this->getResponseData('/campaigns/active/participants');
-
+    dd($data);
     $this->assertEquals($data->data->participants[0]->name, 'Participante 1');
   }
 
