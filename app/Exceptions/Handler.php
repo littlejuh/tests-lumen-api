@@ -9,6 +9,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -49,6 +50,8 @@ class Handler extends ExceptionHandler
   {
     switch ($e) {
       case ($e instanceof NotFoundHttpException):
+            return $this->response()->notFound([], ["error" => ["message" => $e->getMessage()]]);
+            break;
       case ($e instanceof ModelNotFoundException):
         return $this->response()->notFound([], ["error" => ["message" => $e->getMessage()]]);
         break;
