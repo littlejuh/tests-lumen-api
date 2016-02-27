@@ -22,7 +22,7 @@ class ParticipantsController extends Controller
       ->where('end_at', '>', Carbon::now())->first();
 
     if (is_null($campaign)) {
-      return $this->response()->notFound(['participants' => []]);
+      return $this->response()->notFound(['participants' => []])->setStatusCode(404);
     }
     $participants = $campaign->participants()->get();
     $transform = $participants->map(function ($participant) {
