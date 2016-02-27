@@ -7,10 +7,6 @@ class CampaignSeeder extends Seeder
 
   public function run()
   {
-    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-    DB::table('campaigns')->truncate();
-    DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
     $campaign1 = Campaign::create([
       'name' => 'Paredão Semana 2',
       'start_at' => '2016-02-24 23:02:00',

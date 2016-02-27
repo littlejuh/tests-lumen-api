@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Tests;
+
 use Illuminate\Http\Response as IlluminateResponse;
 use Laravel\Lumen\Testing\DatabaseTransactions as DatabaseTransactions;
 use App\Participant;

@@ -1,11 +1,15 @@
 <?php
+
+namespace App\Tests;
+
+use Laravel\Lumen\Application;
 use Laravel\Lumen\Testing\DatabaseTransactions;
 use Laravel\Lumen\Testing\DatabaseMigrations;
-use \Illuminate\Support\Facades\Artisan;
+use App\Tests\Traits\DatabaseSeeds;
 
-class TestCase extends Laravel\Lumen\Testing\TestCase
+class TestCase extends \Laravel\Lumen\Testing\TestCase
 {
-  use DatabaseTransactions, DatabaseMigrations;
+  use DatabaseTransactions, DatabaseMigrations, DatabaseSeeds;
 
   /**
    * The base URL to use while testing the application.
@@ -19,7 +23,7 @@ class TestCase extends Laravel\Lumen\Testing\TestCase
   /**
    * Creates the application.
    *
-   * @return \Illuminate\Foundation\Application
+   * @return Application
    */
 
   public function createApplication()

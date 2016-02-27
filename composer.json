@@ -20,8 +20,7 @@
   },
   "autoload": {
     "psr-4": {
-      "App\\": "app/",
-      "App\\Tests\\": "tests/"
+      "App\\": "app/"
     },
     "classmap": [
       "database/"
@@ -29,11 +28,9 @@
   },
   "autoload-dev": {
     "classmap": [
-      "tests/TestCase.php",
       "database/"
     ],
     "psr-4": {
-      "App\\": "app/",
       "App\\Tests\\": "tests/"
     }
   }
