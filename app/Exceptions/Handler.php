@@ -49,14 +49,12 @@ class Handler extends ExceptionHandler
   public function render($request, Exception $e)
   {
     switch ($e) {
-      case ($e instanceof NotFoundHttpException):
-            return $this->response()->notFound([], ["error" => ["message" => $e->getMessage()]]);
-            break;
       case ($e instanceof ModelNotFoundException):
-        return $this->response()->notFound([], ["error" => ["message" => $e->getMessage()]]);
+      case ($e instanceof NotFoundHttpException):
+        return $this->response()->notFound([], ["error" => ["message" => $e->getMessage()]])->setStatusCode(404);
         break;
       default:
-        return $this->response()->internalError([], ["error" => ["message" => $e->getMessage()]]);
+        return $this->response()->internalError([], ["error" => ["message" => $e->getMessage()]])->setStatusCode(500);
         break;
     }
 
