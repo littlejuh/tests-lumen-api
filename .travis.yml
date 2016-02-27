@@ -9,7 +9,7 @@ php:
 before_script:
   - composer self-update
   - composer install
-  - chmod g+w database/
+  - chmod 777 -R database/
   - touch database/database.sqlite
   - sed -i '1s/^/DB_CONNECTION=sqlite\n/' .env
 
