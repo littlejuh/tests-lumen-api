@@ -8,10 +8,6 @@ class VoteSeeder extends Seeder
 
   public function run()
   {
-    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-    DB::table('votes')->truncate();
-    DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
     $faker = Faker::create();
     for($i=0; $i < 100; $i++){
       Vote::create([
