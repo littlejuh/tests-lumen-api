@@ -36,17 +36,4 @@ class TestCase extends \Laravel\Lumen\Testing\TestCase
   {
     return require __DIR__ . '/../bootstrap/app.php';
   }
-
-  protected function getResponseData($url, $method = 'GET')
-  {
-    $response = $this->call($method, '/' . $this->version . $url);
-    return json_decode($response->getContent());
-  }
-
-  protected function postData($url, $args, $method = 'POST')
-  {
-    $response = $this->call($method, '/' . $this->version . $url, $args);
-    return json_decode($response->getContent());
-  }
-
 }
