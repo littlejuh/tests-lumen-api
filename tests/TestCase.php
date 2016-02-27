@@ -2,6 +2,7 @@
 
 namespace App\Tests;
 
+use Laravel\Lumen\Application;
 use Laravel\Lumen\Testing\DatabaseTransactions;
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use App\Tests\Traits\DatabaseSeeds;
@@ -22,7 +23,7 @@ class TestCase extends \Laravel\Lumen\Testing\TestCase
   /**
    * Creates the application.
    *
-   * @return \Illuminate\Foundation\Application
+   * @return Application
    */
 
   public function createApplication()
