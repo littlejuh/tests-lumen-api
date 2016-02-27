@@ -2,26 +2,30 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Vote extends Model
+class Vote extends ApiModel
 {
-    public $timestamps = false;
+  protected $rules = [
+    'participant_id' => ['required', 'exists:participants,id'],
+    'campaign_id' => ['required', 'exists:campaigns,id'],
+    'ip_address' => ['required']
+  ];
 
-    /**
-     * Get the vote that owns the participant.
-     */
-    public function participant()
-    {
-        return $this->belongsTo('App\Post');
-    }
+  public $timestamps = false;
 
-    /**
-     * Get the vote that owns the campaign.
-     */
-    public function campaign()
-    {
-        return $this->belongsTo('App\Post');
-    }
+  /**
+   * Get the vote that owns the participant.
+   */
+  public function participant()
+  {
+    return $this->belongsTo('App\Participant');
+  }
+
+  /**
+   * Get the vote that owns the campaign.
+   */
+  public function campaign()
+  {
+    return $this->belongsTo('App\Campaign');
+  }
 
 }

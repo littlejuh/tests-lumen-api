@@ -25,6 +25,14 @@ interface Factory
    */
   public function notFound(array $data, array $meta = []);
 
+  /**
+   * @param array $data
+   * @param array $meta
+   *
+   * @return \Illuminate\Http\JsonResponse
+   */
+  public function invalidArgument(array $data, array $meta = []);
+
 
   /**
    * @param array $data

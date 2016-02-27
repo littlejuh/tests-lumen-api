@@ -37,6 +37,19 @@ class Factory implements FactoryContract
    *
    * @return \Illuminate\Http\JsonResponse
    */
+  public function invalidArgument(array $data, array $meta = [])
+  {
+    array_set($meta, 'error.message', Response::INVALID_ARGUMENT);
+
+    return (new InvalidArgumentResponse($data, $meta))->make();
+  }
+
+  /**
+   * @param array $data
+   * @param array $meta
+   *
+   * @return \Illuminate\Http\JsonResponse
+   */
   public function internalError(array $data, array $meta = [])
   {
     array_set($meta, 'error.message', Response::INTERNAL_ERROR);

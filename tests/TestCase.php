@@ -1,9 +1,11 @@
 <?php
 use Laravel\Lumen\Testing\DatabaseTransactions;
 use Laravel\Lumen\Testing\DatabaseMigrations;
+use \Illuminate\Support\Facades\Artisan;
+
 class TestCase extends Laravel\Lumen\Testing\TestCase
 {
-use DatabaseTransactions, DatabaseMigrations;
+  use DatabaseTransactions, DatabaseMigrations;
 
   /**
    * The base URL to use while testing the application.
@@ -31,9 +33,10 @@ use DatabaseTransactions, DatabaseMigrations;
     return json_decode($response->getContent());
   }
 
-  protected function getData($url)
+  protected function postData($url, $args, $method = 'POST')
   {
-    return $this->getData('/' . $this->version . '/' . $url);
+    $response = $this->call($method, '/' . $this->version . $url, $args);
+    return json_decode($response->getContent());
   }
 
 }

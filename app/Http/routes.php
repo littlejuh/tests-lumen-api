@@ -13,6 +13,9 @@
 
 
 $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers'], function ($app) {
-  $app->get('participants', ['uses' => 'ParticipantsController@index']);
-  $app->post('votes', ['uses' => 'VotesController@store']);
+  $app->post('votes', ['uses' => 'VotesController@store', 'middleware' => 'recaptcha']);
+  $app->get('campaigns/active/participants', ['uses' => 'ParticipantsController@index']);
+  $app->get('campaigns', ['uses' => 'CampaignController@index']);
+  $app->get('campaigns/{id}', ['uses' => 'CampaignController@show']);
+  $app->get('campaigns/{id}/participants/details', ['uses' => 'CampaignController@statsParticipants']);
 });

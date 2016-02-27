@@ -4,28 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Campaign;
 use App\Response\Json\Traits\JsonResponseTrait;
-use App\Bbb\Transformers\ParticipantTransformer;
 use Carbon\Carbon;
 
 class ParticipantsController extends Controller
 {
   use JsonResponseTrait;
 
-  protected $participantTransformer;
-
   /**
-   * Create a new controller instance.
-   *
-   * @return void
-   */
-  public function __construct(ParticipantTransformer $participantTransformer)
-  {
-    $this->participantTransformer = $participantTransformer;
-  }
-
-  /**
-   * Display a listing of the resource.
-   * GET /courses
+   * List of participants for the active campaign is not over yet.
+   * GET /participants
    *
    * @return Response
    */
@@ -37,10 +24,13 @@ class ParticipantsController extends Controller
     if (is_null($campaign)) {
       return $this->response()->notFound(['participants' => []]);
     }
-
-    return $this->response()->success(['participants' => $this->participantTransformer
-        ->transformCollection($campaign->participants()->get())]
+    $participants = $campaign->participants()->get();
+    $transform = $participants->map(function ($participant) {
+      return $participant->transformToArray(($participant));
+    });
+    return $this->response()->success(['participants' => $transform]
     );
   }
+
 
 }

@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
     Model::unguard();
     $this->call(ParticipantSeeder::class);
     $this->call(CampaignSeeder::class);
+    $this->call(VoteSeeder::class);
   }
 }
