@@ -17,9 +17,8 @@ class VotesController extends Controller
     $data = array_merge($request->all(), ['ip_address' => $request->ip()]);
 
     if (!$vote->validate($data)) {
-
       return $this->response()->invalidArgument([], ['fields' => $vote->errorsMessage()]
-      );
+      )->setStatusCode(400);
     }
 
     $campaign = Campaign::find($data['campaign_id']);
