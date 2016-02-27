@@ -17,8 +17,14 @@ class TestCase extends \Laravel\Lumen\Testing\TestCase
    * @var string
    */
 
-  protected $baseUrl = 'http://localhost';
   protected $version = 'v1';
+
+
+  public function setUp()
+  {
+    parent::setUp();
+    $this->app->instance('middleware.disable', true);
+  }
 
   /**
    * Creates the application.
