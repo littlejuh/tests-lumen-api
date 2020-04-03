@@ -12,7 +12,7 @@ services:
 before_script:
   - composer self-update
   - composer install
-  - mysql -e 'create database api_bbb;'
+  - mysql -e 'create database api_test;'
   
 scripts: 
   - vendor/bin/phpunit
